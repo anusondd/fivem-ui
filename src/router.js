@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Dashbroad from './pages/dashbroad.vue';
 import Index from './pages/Index.vue';
 import Landing from './pages/Landing.vue';
 import Login from './pages/Login.vue';
@@ -14,6 +15,15 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'dashbroad',
+      components: { default: Dashbroad, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: 'black' }
+      }
+    },
+    {
+      path: '/index',
       name: 'index',
       components: { default: Index, header: MainNavbar, footer: MainFooter },
       props: {
