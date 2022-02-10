@@ -87,24 +87,24 @@ export default {
     async getAccounts() {
       try {
         if (!window.ethereum) {
-          console.log("MetaMask is installed!");
+          // console.log("MetaMask is installed!");
         }
         const web3 = new Web3(Web3.givenProvider)
         this.accounts = await  web3.eth.getAccounts()
-        console.log("accounts", this.accounts);
+        // console.log("accounts", this.accounts);
       } catch (error) {
-        console.error(error.message);
+        // console.error(error.message);
       }
     },
     async sign() {
       try {
         if (!window.ethereum) {
-          console.log("MetaMask is installed!");
+          // console.log("MetaMask is installed!");
         }
         const web3 = new Web3(Web3.givenProvider)
         web3.eth.personal.signTransaction()
       } catch (error) {
-        console.error(error.message);
+        // console.error(error.message);
       }
     },
   },
