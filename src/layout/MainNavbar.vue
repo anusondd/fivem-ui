@@ -8,7 +8,7 @@
   >
     <template>
       <router-link v-popover:popover1 class="navbar-brand" to="/">
-        <h1 class="text-primary" >LHZ</h1>
+        <h1 class="text-primary">LHZ</h1>
       </router-link>
       <el-popover
         ref="popover1"
@@ -24,7 +24,10 @@
     </template>
     <template slot="navbar-menu">
       <li class="nav-item">
-        <button type="button" class="btn btn-round btn-primary"><!----><i class="now-ui-icons shopping_credit-card"></i> connect wallet <!----></button>
+        <!-- <button type="button" class="btn btn-round btn-primary">
+          <i class="now-ui-icons shopping_credit-card"></i> Connect Wallet
+        </button> -->
+        <ButtonSign />
       </li>
       <!-- <li class="nav-item">
         <a
@@ -124,20 +127,22 @@
 </template>
 
 <script>
-import { DropDown, Navbar, NavLink } from '@/components';
-import { Popover } from 'element-ui';
+import { DropDown, Navbar, NavLink } from "@/components";
+import { Popover } from "element-ui";
+import ButtonSign from "../components/Web3/ButtonSign.vue";
 export default {
-  name: 'main-navbar',
+  name: "main-navbar",
   props: {
     transparent: Boolean,
-    colorOnScroll: Number
+    colorOnScroll: Number,
   },
   components: {
     // DropDown,
     Navbar,
     // NavLink,
-    [Popover.name]: Popover
-  }
+    ButtonSign,
+    [Popover.name]: Popover,
+  },
 };
 </script>
 
