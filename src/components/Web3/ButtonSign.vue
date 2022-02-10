@@ -89,8 +89,11 @@ export default {
         if (!window.ethereum) {
           // console.log("MetaMask is installed!");
         }
-        const web3 = new Web3(Web3.givenProvider)
-        this.accounts = await  web3.eth.getAccounts()
+        // const web3 = new Web3(Web3.givenProvider)
+        // this.accounts = await  web3.eth.getAccounts()
+        this.accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
         // console.log("accounts", this.accounts);
       } catch (error) {
         // console.error(error.message);
@@ -101,8 +104,7 @@ export default {
         if (!window.ethereum) {
           // console.log("MetaMask is installed!");
         }
-        const web3 = new Web3(Web3.givenProvider)
-        web3.eth.personal.signTransaction()
+        this.accounts
       } catch (error) {
         // console.error(error.message);
       }
