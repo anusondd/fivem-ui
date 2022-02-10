@@ -1,19 +1,19 @@
 <template>
   <div>
     <button
-      v-if="accounts.length==0"
+      v-if="accounts.length == 0"
       type="button"
       class="btn btn-round btn-primary"
     >
       MetaMask is installed!
     </button>
     <button
-      v-if="accounts.length>0"
+      v-if="accounts.length > 0"
       type="button"
       class="btn btn-round btn-primary"
       @click="sign()"
     >
-      <i class="now-ui-icons shopping_credit-card"></i> {{accounts[0]}}
+      <i class="now-ui-icons shopping_credit-card"></i> {{ accounts[0] }}
     </button>
   </div>
 </template>
@@ -75,13 +75,17 @@ export default {
       // Wallet
       accounts: [],
       activeAccount: null,
-      errorMessage:"",
+      errorMessage: "",
       timer: null,
     };
   },
   mounted() {
-    this.getAccounts()
+    this.getAccounts();
     this.timer = setIntervalAsync(this.getAccounts, 5000);
+    this.changeAccounts()
+  },
+  computed(){
+    // this.changeAccounts()
   },
   methods: {
     async getAccounts() {
@@ -99,12 +103,28 @@ export default {
         // console.error(error.message);
       }
     },
+    async changeAccounts() {
+      try {
+        if (!window.ethereum) {
+          // console.log("MetaMask is installed!");
+        }
+        // const web3 = new Web3(Web3.givenProvider)
+        // this.accounts = await  web3.eth.getAccounts()
+        window.ethereum.on("accountsChanged", function (accounts) {
+          // Time to reload your interface with accounts[0]!
+          this.accounts = accounts;
+        });
+        // console.log("accounts", this.accounts);
+      } catch (error) {
+        // console.error(error.message);
+      }
+    },
     async sign() {
       try {
         if (!window.ethereum) {
           // console.log("MetaMask is installed!");
         }
-        this.accounts
+        this.accounts;
       } catch (error) {
         // console.error(error.message);
       }
