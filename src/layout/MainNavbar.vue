@@ -1,7 +1,6 @@
 <template>
   <navbar
     position="fixed"
-    type="NEUTRAL"
     :transparent="transparent"
     :color-on-scroll="colorOnScroll"
     menu-classes="ml-auto"
@@ -27,7 +26,7 @@
         <!-- <button type="button" class="btn btn-round btn-primary">
           <i class="now-ui-icons shopping_credit-card"></i> Connect Wallet
         </button> -->
-        <ButtonSign />
+        <ButtonSign></ButtonSign>
       </li>
       <!-- <li class="nav-item">
         <a
