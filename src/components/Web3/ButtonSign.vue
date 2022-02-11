@@ -237,7 +237,7 @@ export default {
     },
     async createWallet() {
       let params = this.form;
-      console.log("createWallet", params);
+      // console.log("createWallet", params);
       if (this.form.email == "") {
         this.fromErr = "required email";
       }
