@@ -1,40 +1,94 @@
 <template>
   <div>
     <button
-      v-if="accounts.length == 0 && user==null"
+      v-if="accounts.length == 0 && user == null"
       type="button"
       class="btn btn-round btn-primary"
     >
       MetaMask is installed!
     </button>
     <button
-      v-if="accounts.length > 0 && user==null"
+      v-if="accounts.length > 0 && user == null"
       type="button"
       class="btn btn-round btn-primary"
       @click="connectWallet"
     >
-      <i class="now-ui-icons shopping_credit-card"></i> Connect Wallet
+      <i class="now-ui-icons objects_planet"></i> Connect Acount
     </button>
+    <!-- <button
+      v-if="accounts.length > 0 && user == null"
+      type="button"
+      class="btn btn-round btn-primary"
+      @click="openFormSignUp"
+    >
+      <i class="now-ui-icons objects_spaceship"></i> Create Acount
+    </button> -->
     <button
-      v-if="accounts.length > 0 && user!=null"
+      v-if="accounts.length > 0 && user != null"
       type="button"
       class="btn btn-primary"
     >
-      <i class="now-ui-icons shopping_credit-card"></i> {{user.IDsteam}}
+      <i class="now-ui-icons shopping_credit-card"></i> {{ user.IDsteam }}
     </button>
     <button
-      v-if="accounts.length > 0 && user!=null"
+      v-if="accounts.length > 0 && user != null"
       type="button"
       class="btn btn-round btn-primary"
       @click="signOut"
     >
       Logout
     </button>
+    <!-- {{ token }} -->
+    <!-- {{ user }} -->
+    <!-- small modal -->
+    <modal :show.sync="modals.mini" class="modal" :show-close="false">
+      <!-- <div slot="header" class="modal-profile">
+        <i class="now-ui-icons users_circle-08"></i>
+      </div> -->
+      <div slot="header" class="logo">
+        <img v-lazy="'img/icon-1.png'" alt="" />
+      </div>
+
+      <fg-input
+        class="no-border form-control-lg"
+        addon-left-icon="now-ui-icons shopping_credit-card"
+        placeholder="Address"
+        v-model="form.accountAddress"
+        disabled
+      >
+      </fg-input>
+
+      <fg-input
+        class="no-border form-control-lg"
+        addon-left-icon="now-ui-icons users_circle-08"
+        placeholder="ID Steam"
+        v-model="form.IDsteam"
+      >
+      </fg-input>
+
+      <fg-input
+        class="no-border form-control-lg"
+        placeholder="Email"
+        addon-left-icon="now-ui-icons ui-1_email-85"
+        type="email"
+        v-model="form.email"
+      >
+      </fg-input>
+      <Alert type="danger" v-if="fromErr">{{ fromErr }}</Alert>
+      <n-button
+        type="button"
+        class="btn btn-primary"
+        @click="createWallet"
+        block
+        round
+        >SignUp</n-button
+      >
+    </modal>
   </div>
 </template>
 
 <script>
-import { Button, Modal, FormGroupInput } from "@/components";
+import { Button, Modal, FormGroupInput, Card, Alert } from "@/components";
 import { Popover, Tooltip, DatePicker } from "element-ui";
 import Web3 from "web3";
 import Decimal from "decimal.js";
@@ -73,6 +127,9 @@ const minABI = [
 export default {
   name: "btnsign",
   components: {
+    Modal,
+    // Card,
+    Alert,
     [Button.name]: Button,
     [Popover.name]: Popover,
     [Tooltip.name]: Tooltip,
@@ -93,6 +150,12 @@ export default {
       activeAccount: null,
       errorMessage: "",
       timer: null,
+      form: {
+        email: "anusondd@gmail.com",
+        IDsteam: "76561198253103559",
+        accountAddress: "",
+      },
+      fromErr: "",
     };
   },
   mounted() {
@@ -100,25 +163,25 @@ export default {
     this.timer = setIntervalAsync(this.getAccounts, 5000);
     this.changeAccounts();
   },
-  watch:{
-    accounts(newVal){
+  watch: {
+    accounts(newVal) {
       // console.log('watch',newVal);
-    }
+    },
   },
-  computed:{
+  computed: {
     ...mapState({
-      token: state => state.auth.token,
+      token: (state) => state.auth.token,
     }),
     ...mapGetters({
       user: "auth/getAuth",
       profile: "auth/getProfile",
-    })
+    }),
   },
   methods: {
     ...mapActions({
-      signUpWeb3:'auth/signUpWeb3',
-      signInWeb3:'auth/signInWeb3',
-      signOut:'auth/signOut',
+      signUpWeb3: "auth/signUpWeb3",
+      signInWeb3: "auth/signInWeb3",
+      signOut: "auth/signOut",
     }),
     async getAccounts() {
       try {
@@ -153,11 +216,47 @@ export default {
       }
     },
     async connectWallet() {
-      let params = {accountAddress:this.accounts[0]}
-      console.log('connectWallet',params)
+      let params = { accountAddress: this.accounts[0] };
+      console.log("connectWallet", params);
       try {
-         this.signInWeb3(params)
+        let res = await this.signInWeb3(params);
+        if (res) {
+          this.openFormSignUp();
+        }
       } catch (error) {
+        // console.error(error.message);
+      }
+    },
+    openFormSignUp() {
+      this.modals.mini = true;
+      this.form = {
+        email: "",
+        IDsteam: "",
+        accountAddress: this.accounts[0],
+      };
+    },
+    async createWallet() {
+      let params = this.form;
+      console.log("createWallet", params);
+      if (this.form.email == "") {
+        this.fromErr = "required email";
+      }
+      if (this.form.IDsteam == "") {
+        this.fromErr = "required ID steam";
+      }
+      try {
+        if ((this.form.email != "", this.form.IDsteam != "")) {
+          let res = await this.signUpWeb3(params);
+          if (res) {
+            this.fromErr = res;
+          } else {
+            this.fromErr = null;
+            this.modals.mini = false;
+          }
+        }
+      } catch (error) {
+        this.fromErr = error;
+        // this.modals.mini = false;
         // console.error(error.message);
       }
     },

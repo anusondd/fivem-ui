@@ -10,7 +10,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
+      name: 'dashbroad',
       components: {
         default: Starter,
         header: StarterNavbar,
