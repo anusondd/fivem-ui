@@ -23,7 +23,7 @@ axios.interceptors.response.use(
         return response;
     },
     (error) => {
-        console.error('response-error', error);
+        // console.error('response-error', error);
         let status = (error.response.status) ? error.response.status : 500;
         if (status == 401) {
             let title = error.response.title || 'อื่นๆ';
