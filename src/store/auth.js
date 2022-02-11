@@ -27,7 +27,7 @@ export default {
             let uri = url + '/auth/signUpWeb3'
             try {
                 let result = await HttpClient({ url: uri, method: 'POST', data: val })
-                console.log('data', result);
+                // console.log('data', result);
                 if (result.status == 200) {
                     commit('setToken', result.data.data.token)
                     return null
@@ -37,7 +37,7 @@ export default {
                     return result.data.data.description;
                 }
             } catch (error) {
-                console.log(error);
+                // console.log(error);
                 return error
             }
         },
@@ -45,7 +45,7 @@ export default {
             let uri = url + '/auth/signInWeb3'
             try {
                 let result = await HttpClient({ url: uri, method: 'POST', data: val })
-                console.log('signInWeb3', result);
+                // console.log('signInWeb3', result);
                 if (result.status == 200) {
                     commit('setToken', result.data.data.token)
                     return false; 
