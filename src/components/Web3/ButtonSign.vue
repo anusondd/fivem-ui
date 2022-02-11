@@ -1,19 +1,34 @@
 <template>
   <div>
     <button
-      v-if="accounts.length == 0"
+      v-if="accounts.length == 0 && user==null"
       type="button"
       class="btn btn-round btn-primary"
     >
       MetaMask is installed!
     </button>
     <button
-      v-if="accounts.length > 0"
+      v-if="accounts.length > 0 && user==null"
       type="button"
       class="btn btn-round btn-primary"
-      @click="sign()"
+      @click="connectWallet"
     >
-      <i class="now-ui-icons shopping_credit-card"></i> {{ accounts[0] }}
+      <i class="now-ui-icons shopping_credit-card"></i> Connect Wallet
+    </button>
+    <button
+      v-if="accounts.length > 0 && user!=null"
+      type="button"
+      class="btn btn-primary"
+    >
+      <i class="now-ui-icons shopping_credit-card"></i> {{user.IDsteam}}
+    </button>
+    <button
+      v-if="accounts.length > 0 && user!=null"
+      type="button"
+      class="btn btn-round btn-primary"
+      @click="signOut"
+    >
+      Logout
     </button>
   </div>
 </template>
@@ -28,6 +43,7 @@ import { clearIntervalAsync } from "set-interval-async";
 import { each, map, reverse } from "lodash";
 import { BigNumber } from "bignumber.js";
 import { assetList } from "./assetList.js";
+import { mapActions, mapState, mapGetters } from "vuex";
 
 // For SEP20 transfers.
 const minABI = [
@@ -82,12 +98,28 @@ export default {
   mounted() {
     this.getAccounts();
     this.timer = setIntervalAsync(this.getAccounts, 5000);
-    this.changeAccounts()
+    this.changeAccounts();
   },
-  computed(){
-    // this.changeAccounts()
+  watch:{
+    accounts(newVal){
+      // console.log('watch',newVal);
+    }
+  },
+  computed:{
+    ...mapState({
+      token: state => state.auth.token,
+    }),
+    ...mapGetters({
+      user: "auth/getAuth",
+      profile: "auth/getProfile",
+    })
   },
   methods: {
+    ...mapActions({
+      signUpWeb3:'auth/signUpWeb3',
+      signInWeb3:'auth/signInWeb3',
+      signOut:'auth/signOut',
+    }),
     async getAccounts() {
       try {
         if (!window.ethereum) {
@@ -113,18 +145,18 @@ export default {
         window.ethereum.on("accountsChanged", function (accounts) {
           // Time to reload your interface with accounts[0]!
           this.accounts = accounts;
+          // this.connectWallet()
         });
         // console.log("accounts", this.accounts);
       } catch (error) {
         // console.error(error.message);
       }
     },
-    async sign() {
+    async connectWallet() {
+      let params = {accountAddress:this.accounts[0]}
+      console.log('connectWallet',params)
       try {
-        if (!window.ethereum) {
-          // console.log("MetaMask is installed!");
-        }
-        this.accounts;
+         this.signInWeb3(params)
       } catch (error) {
         // console.error(error.message);
       }
