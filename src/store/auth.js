@@ -28,17 +28,17 @@ export default {
             let uri = url + '/auth/signUpWeb3'
             try {
                 let result = await axios({ url: uri, headers: headers, method: 'POST', data: val })
-                console.log('signUpWeb3', result);
+                // console.log('signUpWeb3', result);
                 commit('setToken', null)
             } catch (error) {
-                console.log(error);
+                // console.log(error);
             }
         },
         async signInWeb3({ commit, state }, val) {
             let uri = url + '/auth/signInWeb3'
             try {
                 let result = await axios({ url: uri, headers: headers, method: 'POST', data: val })
-                console.log('signInWeb3', result);
+                // console.log('signInWeb3', result);
                 if(result.status==200){
                     commit('setToken', result.data.data.token)
                 }else{
@@ -46,7 +46,7 @@ export default {
                 }
             } catch (error) {
                 commit('setToken', null)
-                console.log(error);
+                // console.log(error);
             }
         },
         signOut({ commit, state }){

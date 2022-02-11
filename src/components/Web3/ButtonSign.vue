@@ -154,7 +154,7 @@ export default {
     },
     async connectWallet() {
       let params = {accountAddress:this.accounts[0]}
-      console.log('connectWallet',params)
+      // console.log('connectWallet',params)
       try {
          this.signInWeb3(params)
       } catch (error) {
