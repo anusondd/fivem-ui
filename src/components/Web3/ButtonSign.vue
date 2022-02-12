@@ -13,7 +13,7 @@
       class="btn btn-round btn-primary"
       @click="connectWallet"
     >
-      <i class="now-ui-icons objects_planet"></i> Connect Acount
+      <i class="now-ui-icons objects_planet"></i> Connect Account
     </button>
     <!-- <button
       v-if="accounts.length > 0 && user == null"
@@ -125,7 +125,6 @@ const minABI = [
 ];
 
 export default {
-  name: "btnsign",
   components: {
     Modal,
     // Card,
@@ -174,7 +173,6 @@ export default {
     }),
     ...mapGetters({
       user: "auth/getAuth",
-      profile: "auth/getProfile",
     }),
   },
   methods: {

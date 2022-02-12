@@ -33,6 +33,7 @@
         </div>
       </div>
     </div>
+    <ButtonBuy></ButtonBuy>
     <!-- <basic-elements></basic-elements>
     <navigation></navigation>
     <tabs-section></tabs-section>
@@ -64,6 +65,7 @@
 </template>
 <script>
 import { Parallax } from '@/components';
+import ButtonBuy from '../components/Web3/ButtonBuy.vue';
 // import BasicElements from './components/BasicElementsSection';
 // import Navigation from './components/Navigation';
 // import TabsSection from './components/Tabs';
@@ -82,6 +84,7 @@ export default {
   bodyClass: 'index-page',
   components: {
     Parallax,
+    ButtonBuy
     // BasicElements,
     // Navigation,
     // TabsSection,
