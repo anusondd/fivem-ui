@@ -33,9 +33,9 @@
         </div>
       </div>
     </div>
-    <ButtonBuy tokenSymbo="BBL"  :tokenAmount="100" itemName="gacha_02" :itemAmount="100" ></ButtonBuy>
-    <ButtonBuy tokenSymbo="LHZ"  :tokenAmount="100" itemName="gacha_02" :itemAmount="100" ></ButtonBuy>
-    <ButtonBuy tokenSymbo="BUSD"  :tokenAmount="100" itemName="gacha_02" :itemAmount="100" ></ButtonBuy>
+    <ButtonBuy tokenSymbo="BBL"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy>
+    <ButtonBuy tokenSymbo="LHZ"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy>
+    <ButtonBuy tokenSymbo="BUSD"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy>
     <!-- <basic-elements></basic-elements>
     <navigation></navigation>
     <tabs-section></tabs-section>

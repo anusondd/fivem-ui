@@ -31,8 +31,8 @@ export default {
                     return result.data.data; 
                 }
             } catch (error) {
-                commit('setToken', null)
                 console.log(error);
+                return error
             }
         },
     }

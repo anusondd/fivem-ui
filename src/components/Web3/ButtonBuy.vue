@@ -22,10 +22,13 @@
       headerClasses="justify-content-center"
       type="mini"
     >
-      <div slot="header" class="modal-profile">
+      <!-- <div slot="header" class="modal-profile">
         <i class="now-ui-icons users_circle-08"></i>
-      </div>
-      <p>Always have an access to your profile</p>
+      </div> -->
+      <p>{{errorMessage}}</p>
+      <!-- <a href="https://pancakeswap.finance/">pancakeswap</a>
+      <br>
+      <a href="https://www.binance.com">binance</a> -->
       <template slot="footer">
         <!-- <n-button type="neutral" link>Back</n-button> -->
         <n-button type="neutral" link @click="modals.mini = false"
@@ -42,7 +45,7 @@ import { mapActions, mapState, mapGetters } from "vuex";
 import web3js from "web3";
 import { BigNumber } from "bignumber.js";
 import Decimal from "decimal.js";
-import { Button, Modal, FormGroupInput } from '@/components';
+import { Button, Modal, FormGroupInput } from "@/components";
 // For BSC20 transfers.
 let minABI = [
   // transfer
@@ -95,9 +98,27 @@ const assetList = {
   },
 };
 
+const networks = {
+  mainnet: {
+    name: "Smart Chain",
+    RPC: "https://bsc-dataseed.binance.org/",
+    ChainID: `0x${Number(56).toString(16)}`,
+    Symbol: "BNB",
+    URL: "https://bscscan.com",
+  },
+  testnet: {
+    name: "Smart Chain - Testnet",
+    RPC: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+    ChainID: `0x${Number(97).toString(16)}`,
+    Symbol: "BNB",
+    URL: "https://testnet.bscscan.com",
+  },
+};
+
 export default {
-  components:{
-     Modal,
+  components: {
+    Modal,
+    [Button.name]: Button,
   },
   props: {
     tokenSymbo: {
@@ -202,13 +223,34 @@ export default {
         itemAmount: this.itemAmount,
       };
       try {
+        this.switchNetwork();
         const asset = assetList[this.tokenSymbo];
         let balance = await this.getBalanceToken(asset.address);
         if (balance > this.tokenAmount) {
-          // let _id = await this.addTrasaction(params);
-          let _id = await this.sendAsset();
-        }else{
-          this.modals.mini = true
+          let _id = await this.addTrasaction(params);
+          let hash = await this.sendAsset();
+          if(hash){
+            let transactionHash = hash.transactionHash;
+            let data = {
+              _id: _id,
+              hash: transactionHash,
+              accountAddress: params.accountAddress,
+              IDsteam: params.IDsteam,
+              tokenSymbo: params.tokenSymbo,
+              tokenAmount: params.tokenAmount,
+              itemName: params.itemName,
+              itemAmount: params.itemAmount,
+            };
+            console.log('data',data);
+            let result = await this.confirmTransaction(data);
+            console.log('result',result);
+          }else{
+            this.errorMessage = `Transaction Fail`;
+            this.modals.mini = true;
+          }
+        } else {
+          this.errorMessage = `You don't have token.`;
+          this.modals.mini = true;
         }
       } catch (error) {
         console.error(error);
@@ -227,18 +269,51 @@ export default {
       try {
         const web3 = new web3js(web3js.givenProvider);
         let contract = new web3.eth.Contract(minABI, asset.address);
-        contract.methods
+        let hash = await contract.methods
           .transfer(sendTo, value)
-          .send({ from: fromAddress })
-          .on("transactionHash", function (hash) {
-            console.log(hash);
-          });
+          .send({ from: fromAddress });
+        // .on("transactionHash", function (hash) {
+        //   console.log(hash);
+        // });
+        console.log("hash", hash);
+        return hash;
       } catch (error) {
         console.error(error);
+        return null;
       }
     },
-    validNetwork() {
-      return window.ethereum.chainId === "0x2710";
+    async switchNetwork() {
+      const web3 = new web3js(web3js.givenProvider);
+      const network = networks["mainnet"];
+      try {
+        await web3.currentProvider.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: network.ChainID }],
+        });
+      } catch (error) {
+        if (error.code === 4902) {
+          try {
+            await web3.currentProvider.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainId: network.ChainID,
+                  chainName: network.name,
+                  rpcUrls: [network.RPC],
+                  nativeCurrency: {
+                    name: "Binance",
+                    symbol: network.Symbol,
+                    decimals: 18,
+                  },
+                  blockExplorerUrls: [network.URL],
+                },
+              ],
+            });
+          } catch (error) {
+            alert(error.message);
+          }
+        }
+      }
     },
     async getBalanceToken(contractAddress) {
       const fromAddress = this.accounts[0];

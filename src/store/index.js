@@ -13,7 +13,8 @@ const vuexLocalStorage = new VuexPersist({
 })
 export default new Vuex.Store({
     modules: {
-        auth
+        auth,
+        order,
     },
     // plugins: [vuexLocalStorage.plugin],
 })
