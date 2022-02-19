@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row align="center" justify="center" no-gutters>
-      <span class="tab-width">
+      <span class="tab-width p-1">
         <v-btn
           v-if="tab == 1"
           @click="tab = 1;passTab(1)"
@@ -10,7 +10,7 @@
           elevation="0"
           class="mr-1 btn font-7"
           dark
-          >Team</v-btn
+          >USDT</v-btn
         >
         <v-btn
           v-else
@@ -20,10 +20,10 @@
           plain
           class="mr-1 btn font-7"
           dark
-          >Team</v-btn
+          >USDT</v-btn
         >
       </span>
-      <span class="tab-width">
+      <span class="tab-width p-1">
         <v-btn
           v-if="tab == 2"
           @click="tab = 2;passTab(2)"
@@ -31,7 +31,7 @@
           elevation="0"
           class="mr-1 btn font-7"
           dark
-          >Couple</v-btn
+          >BUSD</v-btn
         >
         <v-btn
           v-else
@@ -41,10 +41,10 @@
           plain
           class="mr-1 btn font-7"
           dark
-          >Couple</v-btn
+          >BUSD</v-btn
         >
       </span>
-      <span class="tab-width">
+      <span class="tab-width p-1">
         <v-btn
           v-if="tab == 3"
           @click="tab = 3;passTab(3)"
@@ -52,7 +52,7 @@
           elevation="0"
           class="mr-1 btn font-7"
           dark
-          >Family</v-btn
+          >BNB</v-btn
         >
         <v-btn
           v-else
@@ -62,7 +62,7 @@
           text
           class="mr-1 btn font-7"
           dark
-          >Family</v-btn
+          >BNB</v-btn
         >
       </span>
     </v-row>

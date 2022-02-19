@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="main">
+    <!-- <div class="main">
       <div class="section section-images">
         <div class="container">
           <div class="row">
@@ -32,11 +32,11 @@
           </div>
         </div>
       </div>
-    </div>
-    <specialsHomeVue />
-    <ButtonBuy tokenSymbo="BBL"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy>
+    </div> -->
+    <specialsDashbroadVue />
+    <!-- <ButtonBuy tokenSymbo="BBL"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy>
     <ButtonBuy tokenSymbo="LHZ"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy>
-    <ButtonBuy tokenSymbo="BUSD"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy>
+    <ButtonBuy tokenSymbo="BUSD"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy> -->
     <!-- <basic-elements></basic-elements>
     <navigation></navigation>
     <tabs-section></tabs-section>
@@ -81,14 +81,14 @@ import ButtonBuy from '../components/Web3/ButtonBuy.vue';
 // import SignupForm from './components/SignupForm';
 // import ExamplesSection from './components/ExamplesSection';
 // import DownloadSection from './components/DownloadSection';
-import specialsHomeVue from '../components/Home/specials.home.vue'
+import specialsDashbroadVue from '../components/Home/specials.dashbroad.vue'
 export default {
   name: 'dashbroad',
   bodyClass: 'index-page',
   components: {
     Parallax,
-    ButtonBuy,
-    specialsHomeVue,
+    // ButtonBuy,
+    specialsDashbroadVue,
     // BasicElements,
     // Navigation,
     // TabsSection,
