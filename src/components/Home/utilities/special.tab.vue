@@ -4,9 +4,12 @@
       <span class="tab-width p-1">
         <v-btn
           v-if="tab == 1"
-          @click="tab = 1;passTab(1)"
+          @click="
+            tab = 1;
+            passTab(1);
+          "
           color="blue"
-          style="height:100%"
+          style="height: 100%"
           elevation="0"
           class="mr-1 btn font-7"
           dark
@@ -15,7 +18,10 @@
         <v-btn
           v-else
           color="black"
-          @click="tab = 1;passTab(1)"
+          @click="
+            tab = 1;
+            passTab(1);
+          "
           elevation="0"
           plain
           class="mr-1 btn font-7"
@@ -26,7 +32,10 @@
       <span class="tab-width p-1">
         <v-btn
           v-if="tab == 2"
-          @click="tab = 2;passTab(2)"
+          @click="
+            tab = 2;
+            passTab(2);
+          "
           color="blue"
           elevation="0"
           class="mr-1 btn font-7"
@@ -36,7 +45,10 @@
         <v-btn
           v-else
           color="black"
-          @click="tab = 2;passTab(2)"
+          @click="
+            tab = 2;
+            passTab(2);
+          "
           elevation="0"
           plain
           class="mr-1 btn font-7"
@@ -47,22 +59,28 @@
       <span class="tab-width p-1">
         <v-btn
           v-if="tab == 3"
-          @click="tab = 3;passTab(3)"
+          @click="
+            tab = 3;
+            passTab(3);
+          "
           color="blue"
           elevation="0"
           class="mr-1 btn font-7"
           dark
-          >BNB</v-btn
+          >LHZ</v-btn
         >
         <v-btn
           v-else
           color="black"
           elevation="0"
-          @click="tab = 3;passTab(3)"
+          @click="
+            tab = 3;
+            passTab(3);
+          "
           text
           class="mr-1 btn font-7"
           dark
-          >BNB</v-btn
+          >LHZ</v-btn
         >
       </span>
     </v-row>
@@ -71,17 +89,15 @@
 
 <script>
 export default {
-    props:['tab','tabs'],
+  props: ["tab", "tabs"],
   data() {
-    return {
-     
-    };
+    return {};
   },
-  methods:{
-      passTab(value){
-          this.$emit("updateValue",value)
-      }
-  }
+  methods: {
+    passTab(value) {
+      this.$emit("updateValue", value);
+    },
+  },
 };
 </script>
 

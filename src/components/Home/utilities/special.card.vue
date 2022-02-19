@@ -26,8 +26,9 @@
             <v-row no-gutters align="center" justify="center">
                 <p class="font-4 weight-500 mb-n1">{{info.data.itemAmount}}<span class="font-6 grey--text"> Item</span></p>
                 <v-spacer></v-spacer>
-                <v-btn   elevation="0" style="text-transform:none" class="font-7 d-none d-sm-flex blue--text" color="blue lighten-5">Book Now</v-btn>
-                <v-btn small   elevation="0" style="text-transform:none" class="font-7 d-flex d-sm-none" color="blue lighten-5 blue--text">Book Now</v-btn>
+                <!-- <v-btn   elevation="0" style="text-transform:none" class="font-7 d-none d-sm-flex blue--text" color="blue lighten-5">Book Now</v-btn> -->
+                <ButtonBuy :tokenSymbo="info.data.tokenSymbo"  :tokenAmount="info.data.tokenAmount" :itemName="info.data.itemName" :itemAmount="info.data.itemAmount" ></ButtonBuy>
+                <!-- <v-btn small   elevation="0" style="text-transform:none" class="font-7 d-flex d-sm-none" color="blue lighten-5 blue--text">Book Now</v-btn> -->
             </v-row>
        </div>
       </div>
@@ -36,8 +37,12 @@
 </template>
 
 <script>
+import ButtonBuy from '../../Web3/ButtonBuy.vue';
 export default {
-    props:['info']
+    props:['info'],
+    components:{
+      ButtonBuy
+    }
 };
 </script>
 

@@ -1,17 +1,26 @@
 <template>
   <div>
-    <button v-if="user == null" type="button" class="btn btn-round btn-primary">
+    <v-btn
+      v-if="user == null"
+      elevation="0"
+      style="text-transform: none"
+      class="font-7 d-none d-sm-flex blue--text"
+      color="blue lighten-5"
+    >
       <i class="now-ui-icons objects_planet"></i>
       Connect Account
-    </button>
-    <button
+    </v-btn>
+    <v-btn
       v-if="user != null"
-      type="button"
-      class="btn btn-round btn-primary"
+      elevation="0"
+      style="text-transform: none"
+      class="font-7 d-none d-sm-flex blue--text"
+      color="blue lighten-5"
       @click="buyNow"
     >
+      <i class="now-ui-icons objects_planet"></i>
       Buy Now ({{ tokenSymbo }})
-    </button>
+    </v-btn>
     <!-- {{accounts}} -->
     <!-- {{user}} -->
     <!-- small modal -->
@@ -25,7 +34,7 @@
       <!-- <div slot="header" class="modal-profile">
         <i class="now-ui-icons users_circle-08"></i>
       </div> -->
-      <p>{{errorMessage}}</p>
+      <p>{{ errorMessage }}</p>
       <!-- <a href="https://pancakeswap.finance/">pancakeswap</a>
       <br>
       <a href="https://www.binance.com">binance</a> -->
@@ -95,6 +104,14 @@ const assetList = {
     decimals: 18,
     balance: 0,
     address: "0x4fabb145d64652a948d72533023f6e7a623c7c53",
+  },
+  USDT: {
+    symbol: "USDT",
+    name: "Binance-Peg USDT Token",
+    type: "BSC20",
+    decimals: 18,
+    balance: 0,
+    address: "0x55d398326f99059ff775485246999027b3197955",
   },
 };
 
@@ -229,7 +246,7 @@ export default {
         if (balance > this.tokenAmount) {
           let _id = await this.addTrasaction(params);
           let hash = await this.sendAsset();
-          if(hash){
+          if (hash) {
             let transactionHash = hash.transactionHash;
             let data = {
               _id: _id,
@@ -241,10 +258,10 @@ export default {
               itemName: params.itemName,
               itemAmount: params.itemAmount,
             };
-            console.log('data',data);
+            console.log("data", data);
             let result = await this.confirmTransaction(data);
-            console.log('result',result);
-          }else{
+            console.log("result", result);
+          } else {
             this.errorMessage = `Transaction Fail`;
             this.modals.mini = true;
           }
