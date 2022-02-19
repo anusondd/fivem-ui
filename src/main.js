@@ -20,6 +20,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import NowUiKit from './plugins/now-ui-kit';
+import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false;
 
@@ -29,5 +30,6 @@ Vue.use(store);
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app');
