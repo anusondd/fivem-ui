@@ -220,7 +220,7 @@ export default {
     },
     async connectWallet() {
       let params = { accountAddress: this.accounts[0] };
-      console.log("connectWallet", params);
+      // console.log("connectWallet", params);
       try {
         let res = await this.signInWeb3(params);
         if (res) {
@@ -258,9 +258,9 @@ export default {
               itemName: params.itemName,
               itemAmount: params.itemAmount,
             };
-            console.log("data", data);
+            // console.log("data", data);
             let result = await this.confirmTransaction(data);
-            console.log("result", result);
+            // console.log("result", result);
           } else {
             this.errorMessage = `Transaction Fail`;
             this.modals.mini = true;
@@ -270,7 +270,7 @@ export default {
           this.modals.mini = true;
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
     async sendAsset() {
@@ -279,7 +279,7 @@ export default {
       const asset = assetList[this.tokenSymbo];
       // const contract = new web3js.eth.Contract(minABI, asset.address);
       // const gasPrice = web3js.utils.toWei("0.00000000105", "ether");
-      console.log("asset", asset, this.tokenSymbo, fromAddress);
+      // console.log("asset", asset, this.tokenSymbo, fromAddress);
       const decimals = web3js.utils.toBN(asset.decimals);
       const amount = new BigNumber(this.tokenAmount);
       const value = amount.multipliedBy(web3js.utils.toBN(10).pow(decimals));
@@ -292,10 +292,10 @@ export default {
         // .on("transactionHash", function (hash) {
         //   console.log(hash);
         // });
-        console.log("hash", hash);
+        // console.log("hash", hash);
         return hash;
       } catch (error) {
-        console.error(error);
+        // console.error(error);
         return null;
       }
     },
@@ -344,7 +344,7 @@ export default {
         returnType: "uint256",
       });
       let balance = new Decimal(web3js.utils.fromWei(getBalance));
-      console.log("balance", balance.toString());
+      // console.log("balance", balance.toString());
       return +balance.toString();
     },
   },

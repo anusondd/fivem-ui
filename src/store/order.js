@@ -13,12 +13,12 @@ export default {
             let uri = url + '/web3/addTrasaction'
             try {
                 let result = await HttpClient({ url: uri, method: 'POST', data: val })
-                console.log('addTrasaction', result);
+                // console.log('addTrasaction', result);
                 if (result.status == 200) {
                     return result.data.data
                 }
             } catch (error) {
-                console.log(error);
+                // console.log(error);
                 return error
             }
         },
@@ -26,12 +26,12 @@ export default {
             let uri = url + '/web3/confirmTransaction'
             try {
                 let result = await HttpClient({ url: uri, method: 'POST', data: val })
-                console.log('confirmTransaction', result);
+                // console.log('confirmTransaction', result);
                 if (result.status == 200) {
                     return result.data.data; 
                 }
             } catch (error) {
-                console.log(error);
+                // console.log(error);
                 return error
             }
         },
