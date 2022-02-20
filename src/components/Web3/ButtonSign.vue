@@ -13,7 +13,7 @@
       class="btn btn-round btn-primary"
       @click="connectWallet"
     >
-      <i class="now-ui-icons objects_planet"></i> Connect Acount
+      <i class="now-ui-icons objects_planet"></i> Connect Account
     </button>
     <!-- <button
       v-if="accounts.length > 0 && user == null"
@@ -99,33 +99,7 @@ import { BigNumber } from "bignumber.js";
 import { assetList } from "./assetList.js";
 import { mapActions, mapState, mapGetters } from "vuex";
 
-// For SEP20 transfers.
-const minABI = [
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "_to",
-        type: "address",
-      },
-      {
-        name: "_value",
-        type: "uint256",
-      },
-    ],
-    name: "transfer",
-    outputs: [
-      {
-        name: "",
-        type: "bool",
-      },
-    ],
-    type: "function",
-  },
-];
-
 export default {
-  name: "btnsign",
   components: {
     Modal,
     // Card,
@@ -174,7 +148,6 @@ export default {
     }),
     ...mapGetters({
       user: "auth/getAuth",
-      profile: "auth/getProfile",
     }),
   },
   methods: {

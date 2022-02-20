@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist';
 Vue.use(Vuex)
 import auth from "./auth";
+import order from "./order";
 const vuexLocalStorage = new VuexPersist({
     // key: 'vuex' // The key to store the state on in the storage provider.
     storage: window.localStorage, // or window.sessionStorage or localForage
@@ -12,7 +13,8 @@ const vuexLocalStorage = new VuexPersist({
 })
 export default new Vuex.Store({
     modules: {
-        auth
+        auth,
+        order,
     },
     // plugins: [vuexLocalStorage.plugin],
 })

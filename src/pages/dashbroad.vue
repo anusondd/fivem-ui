@@ -10,11 +10,11 @@
         <div class="content-center brand">
           <img class="n-logo" src="img/logo-lhz.png" alt="" />
           <!-- <h1 class="h1-seo text-primary">LOG HORIZON SPACE</h1> -->
-          <h3>GameFi Cryto, NFT, FIVEM, GTA, ROLEPLAY</h3>
+          <h3>GameFi Cryto, NFT, FIVEM, GTA</h3>
         </div>
       </div>
     </div>
-    <div class="main">
+    <!-- <div class="main">
       <div class="section section-images">
         <div class="container">
           <div class="row">
@@ -32,7 +32,11 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+    <specialsDashbroadVue />
+    <!-- <ButtonBuy tokenSymbo="BBL"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy>
+    <ButtonBuy tokenSymbo="LHZ"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy>
+    <ButtonBuy tokenSymbo="BUSD"  :tokenAmount="1" itemName="gacha_02" :itemAmount="10" ></ButtonBuy> -->
     <!-- <basic-elements></basic-elements>
     <navigation></navigation>
     <tabs-section></tabs-section>
@@ -64,6 +68,7 @@
 </template>
 <script>
 import { Parallax } from '@/components';
+import ButtonBuy from '../components/Web3/ButtonBuy.vue';
 // import BasicElements from './components/BasicElementsSection';
 // import Navigation from './components/Navigation';
 // import TabsSection from './components/Tabs';
@@ -76,12 +81,14 @@ import { Parallax } from '@/components';
 // import SignupForm from './components/SignupForm';
 // import ExamplesSection from './components/ExamplesSection';
 // import DownloadSection from './components/DownloadSection';
-
+import specialsDashbroadVue from '../components/Home/specials.dashbroad.vue'
 export default {
   name: 'dashbroad',
   bodyClass: 'index-page',
   components: {
     Parallax,
+    // ButtonBuy,
+    specialsDashbroadVue,
     // BasicElements,
     // Navigation,
     // TabsSection,
