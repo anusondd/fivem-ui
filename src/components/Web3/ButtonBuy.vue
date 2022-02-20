@@ -6,6 +6,7 @@
       style="text-transform: none"
       class="font-7 d-none d-sm-flex blue--text"
       color="blue lighten-5"
+      @click="connectWallet"
     >
       <i class="now-ui-icons objects_planet"></i>
       Connect Account
@@ -286,7 +287,7 @@ export default {
       try {
         const web3 = new web3js(web3js.givenProvider);
         let contract = new web3.eth.Contract(minABI, asset.address);
-        let hash = await contract.methods
+        const hash = await contract.methods
           .transfer(sendTo, value)
           .send({ from: fromAddress });
         // .on("transactionHash", function (hash) {
