@@ -70,7 +70,7 @@ export default {
       specials: {
         USDT: [
           {
-            img: require("../../assets/images/special1.png"),
+            img: require("../../assets/images/package/nemo.png"),
             date: "14 FEB 2022",
             tag: "Beginer",
             title: "Nemo",
@@ -84,7 +84,7 @@ export default {
             },
           },
           {
-            img: require("../../assets/images/special2.png"),
+            img: require("../../assets/images/package/shark.png"),
             date: "18 JUN 2022",
             tag: "Professional",
             title: "Shark",
@@ -98,7 +98,7 @@ export default {
             },
           },
           {
-            img: require("../../assets/images/special3.png"),
+            img: require("../../assets/images/package/whale.png"),
             date: "22 DEC 2022",
             tag: "Expert",
             title: "Whale",
@@ -114,7 +114,7 @@ export default {
         ],
         BUSD: [
           {
-            img: require("../../assets/images/special1.png"),
+            img: require("../../assets/images/package/nemo.png"),
             date: "14 FEB 2022",
             tag: "Beginer",
             title: "Nemo",
@@ -128,7 +128,7 @@ export default {
             },
           },
           {
-            img: require("../../assets/images/special2.png"),
+            img: require("../../assets/images/package/shark.png"),
             date: "18 JUN 2022",
             tag: "Professional",
             title: "Shark",
@@ -142,7 +142,7 @@ export default {
             },
           },
           {
-            img: require("../../assets/images/special3.png"),
+            img: require("../../assets/images/package/whale.png"),
             date: "22 DEC 2022",
             tag: "Expert",
             title: "Whale",
@@ -158,7 +158,7 @@ export default {
         ],
         LHZ: [
           {
-            img: require("../../assets/images/special1.png"),
+            img: require("../../assets/images/package/nemo.png"),
             date: "14 FEB 2022",
             tag: "Beginer",
             title: "Nemo",
@@ -172,7 +172,7 @@ export default {
             },
           },
           {
-            img: require("../../assets/images/special2.png"),
+            img: require("../../assets/images/package/shark.png"),
             date: "18 JUN 2022",
             tag: "Professional",
             title: "Shark",
@@ -186,7 +186,7 @@ export default {
             },
           },
           {
-            img: require("../../assets/images/special3.png"),
+            img: require("../../assets/images/package/whale.png"),
             date: "22 DEC 2022",
             tag: "Expert",
             title: "Whale",
