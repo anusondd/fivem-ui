@@ -284,7 +284,7 @@ export default {
       const decimals = web3js.utils.toBN(asset.decimals);
       const amount = new BigNumber(this.tokenAmount);
       const value = amount.multipliedBy(web3js.utils.toBN(10).pow(decimals));
-      console.log('value',value);
+      // console.log('value',value);
       try {
         const web3 = new web3js(web3js.givenProvider);
         let contract = new web3.eth.Contract(minABI, asset.address);
