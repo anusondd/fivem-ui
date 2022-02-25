@@ -248,7 +248,7 @@ export default {
           let _id = await this.addTrasaction(params);
           let hash = await this.sendAsset();
           if (hash) {
-            let transactionHash = hash.transactionHash;
+            let transactionHash = hash;
             let data = {
               _id: _id,
               hash: transactionHash,
@@ -287,12 +287,17 @@ export default {
       try {
         const web3 = new web3js(web3js.givenProvider);
         let contract = new web3.eth.Contract(minABI, asset.address);
-        const hash = await contract.methods
-          .transfer(sendTo, value)
-          .send({ from: fromAddress });
-        // .on("transactionHash", function (hash) {
-        //   console.log(hash);
-        // });
+        const promise = new Promise((resolve, reject) => {
+          contract.methods
+            .transfer(sendTo, value)
+            .send({ from: fromAddress })
+            .on("transactionHash", function (hash) {
+              console.log(hash);
+              resolve(hash)
+            })
+            .on('error',(error)=>{reject(error)})
+        });
+        const hash = await promise;
         console.log("hash", hash);
         return hash;
       } catch (error) {
