@@ -295,13 +295,17 @@ export default {
               // console.log(hash);
               resolve(hash)
             })
-            .on('error',(error)=>{reject(error)})
+            .on('error',(error)=>{
+              alert(error);
+              reject(error)
+            })
         });
         const hash = await promise;
         // console.log("hash", hash);
         return hash;
       } catch (error) {
         // console.error(error);
+        alert(error);
         return null;
       }
     },
